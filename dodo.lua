@@ -1,12 +1,11 @@
 repeat task.wait() until game:IsLoaded()
 
-local args = {
-    [1] = "Disable_Weather_Mutate_Sand",
-    [2] = true
-}
+local remote = game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("SettingRE")
 
-game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("SettingRE"):FireServer(unpack(args))
+remote:FireServer("Disable_Weather_Mutate_Sand", true)
+remote:FireServer("Disable_Weather_Mutate_Aurora", true)
 
+-- main
 task.wait(10)
 getgenv().g_config = {
     global_workspace = true, -- (Default: true)
