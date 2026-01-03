@@ -13,6 +13,6 @@ getgenv().g_config = {
     whitescreen = false, -- (Default: false)
     headless = true -- (Default: false)
 }
-script_key="NfpFBaIfvgmDOLdlUUwkUEwulSeupYiD"
+script_key="CyUpdWKPgIfhyZjdhWMZdtYcKyIZlnnO"
 premium=true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dodohubx-rgb/dodohub/refs/heads/main/loader.luau"))()
