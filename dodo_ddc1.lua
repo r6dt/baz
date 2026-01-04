@@ -11,7 +11,7 @@ getgenv().g_config = {
     global_workspace = true, -- (Default: true)
     auto_hideui = true, -- (Default: false)
     whitescreen = false, -- (Default: false)
-    headless = true -- (Default: false)
+    headless = false -- (Default: false)
 }
 script_key="CyUpdWKPgIfhyZjdhWMZdtYcKyIZlnnO"
 premium=true
