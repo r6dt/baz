@@ -1,10 +1,5 @@
 repeat task.wait() until game:IsLoaded()
 
-local remote = game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("SettingRE")
-
-remote:FireServer("Disable_Weather_Mutate_Sand", true)
-remote:FireServer("Disable_Weather_Mutate_Aurora", true)
-
 -- main
 task.wait(5)
 getgenv().g_config = {
