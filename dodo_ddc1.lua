@@ -3,6 +3,7 @@ repeat task.wait() until game.Players
 repeat task.wait() until game.Players.LocalPlayer
 repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 
+task.wait(20)
 -- Services
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
@@ -24,7 +25,7 @@ local newCFrame = currentCFrame * CFrame.new(0, 0, -distance)
 humanoidRootPart.CFrame = newCFrame
 
 -- main
-task.wait(10)
+task.wait(20)
 getgenv().g_config = {
     global_workspace = true, -- (Default: true)
     auto_hideui = true, -- (Default: false)
