@@ -34,5 +34,3 @@ getgenv().g_config = {
 script_key="CyUpdWKPgIfhyZjdhWMZdtYcKyIZlnnO"
 premium=true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dodohubx-rgb/dodohub/refs/heads/main/loader.luau"))()
-
-ใส่แบบนี้ได้ใช่มั้ย
