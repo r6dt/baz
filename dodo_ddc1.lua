@@ -1,28 +1,17 @@
 repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players
-repeat task.wait() until game.Players.LocalPlayer
-repeat task.wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 
-task.wait(20)
--- Services
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
--- รอให้ตัวละครโหลด
+-- รอให้ Character พร้อมจริง ๆ
 local character = player.Character or player.CharacterAdded:Wait()
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local hrp = character:WaitForChild("HumanoidRootPart")
 
--- ตำแหน่งปัจจุบัน + ทิศทางที่ตัวละครหันหน้าอยู่
-local currentCFrame = humanoidRootPart.CFrame
+-- รอให้ Roblox เซ็ตตำแหน่งเสร็จ
+task.wait(1.5)
 
--- ระยะที่จะ TP (30 studs)
-local distance = 100
-
--- คำนวณตำแหน่งไปข้างหน้า
-local newCFrame = currentCFrame * CFrame.new(0, 0, -distance)
-
--- TP
-humanoidRootPart.CFrame = newCFrame
+-- TP ไปข้างหน้า 100 studs
+hrp.CFrame = hrp.CFrame * CFrame.new(0, 0, -100)
 
 -- main
 task.wait(20)
