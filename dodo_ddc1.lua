@@ -17,12 +17,34 @@ task.wait(1.5)
 hrp.CFrame = hrp.CFrame * CFrame.new(0, 0, -100)
 
 -- ======================
--- ฟังก์ชันซ่อน Pets / Eggs / Effects (Client Only)
+-- ฟังก์ชันจอดำ Overlay
+-- ======================
+local function _toggleBlackOverlay(show)
+    local pg = player:FindFirstChild("PlayerGui")
+    if not pg then return end
+
+    local gui = pg:FindFirstChild("PerfBlack") or Instance.new("ScreenGui", pg)
+    gui.Name = "PerfBlack"
+    gui.IgnoreGuiInset = true
+    gui.DisplayOrder = 1e9
+    gui.ResetOnSpawn = false
+
+    local frame = gui:FindFirstChild("F") or Instance.new("Frame", gui)
+    frame.Name = "F"
+    frame.Size = UDim2.fromScale(1,1)
+    frame.BackgroundColor3 = Color3.new(0,0,0)
+    frame.BackgroundTransparency = show and 0 or 1
+
+    gui.Enabled = show
+end
+
+-- ======================
+-- ซ่อน Pets / Eggs / Effects
 -- ======================
 local function HideAllClient()
     for _, obj in ipairs(Workspace:GetChildren()) do
 
-        -- ซ่อน Pets
+        -- Pets
         if obj:IsA("Folder") and obj.Name == "Pets" then
             for _, pet in ipairs(obj:GetChildren()) do
                 for _, part in ipairs(pet:GetDescendants()) do
@@ -36,7 +58,7 @@ local function HideAllClient()
             end
         end
 
-        -- ซ่อน Eggs
+        -- Eggs
         if obj:IsA("Folder") and obj.Name == "Eggs" then
             for _, egg in ipairs(obj:GetChildren()) do
                 for _, part in ipairs(egg:GetDescendants()) do
@@ -50,7 +72,7 @@ local function HideAllClient()
             end
         end
 
-        -- ปิด Effects อื่น ๆ
+        -- Effects อื่น
         for _, v in ipairs(obj:GetDescendants()) do
             if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") then
                 v.Enabled = false
@@ -60,9 +82,13 @@ local function HideAllClient()
 end
 
 -- ======================
--- รัน AFK Mode อัตโนมัติ
+-- AFK Mode อัตโนมัติ
 -- ======================
 task.defer(function()
+    -- เปิด Overlay ทันที
+    _toggleBlackOverlay(true)
+
+    -- ซ่อนทุกอย่าง
     HideAllClient()
 
     -- ล็อก FPS
@@ -74,13 +100,13 @@ task.defer(function()
 end)
 
 -- ======================
--- เรียกซ้ำ เผื่อมี spawn ใหม่
+-- กันของ Spawn ใหม่
 -- ======================
 RunService.RenderStepped:Connect(function()
     HideAllClient()
 end)
 
-print("[AFK MODE] TP + Hide Pets/Eggs/Effects + FPS lock (NO BLACK/WHITE SCREEN)")
+print("[AFK MODE] TP + Hide Pets/Eggs/Effects + FPS lock + Overlay (3D ON)")
 
 -- main
 task.wait(20)
