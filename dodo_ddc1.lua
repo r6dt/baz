@@ -91,14 +91,6 @@ task.defer(function()
     -- ซ่อนทุกอย่าง
     HideAllClient()
 
-    -- ล็อก FPS
-    if setfpscap then
-        setfpscap(5)
-    elseif _setFPSCap then
-        _setFPSCap(5)
-    end
-end)
-
 -- ======================
 -- กันของ Spawn ใหม่
 -- ======================
