@@ -1,5 +1,8 @@
 repeat task.wait() until game:IsLoaded()
 
+task.wait(5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/r6dt/baz/refs/heads/main/config.lua"))()
+
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
@@ -100,9 +103,6 @@ RunService.RenderStepped:Connect(function()
 end)
 
 print("[AFK MODE] TP + Hide Pets/Eggs/Effects + FPS lock + Overlay (3D ON)")
-
-task.wait(5)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/r6dt/baz/refs/heads/main/config.lua"))()
 
 -- main
 task.wait(20)
