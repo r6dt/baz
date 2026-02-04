@@ -90,6 +90,7 @@ task.defer(function()
 
     -- ซ่อนทุกอย่าง
     HideAllClient()
+end)
 
 -- ======================
 -- กันของ Spawn ใหม่
