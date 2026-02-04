@@ -1,8 +1,5 @@
 repeat task.wait() until game:IsLoaded()
 
-task.wait(5)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/r6dt/baz/refs/heads/main/config.lua"))()
-
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
