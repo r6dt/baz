@@ -8,10 +8,11 @@ local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 
--- รอ Character พร้อม
+-- รอให้ Character พร้อมจริง ๆ
 local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
 
+-- รอให้ Roblox เซ็ตตำแหน่งเสร็จ
 task.wait(1.5)
 
 -- ======================
@@ -42,13 +43,13 @@ local function _toggleBlackOverlay(show)
 end
 
 -- ======================
--- ซ่อน Pets / Eggs / Effects
+-- ฟังก์ชันซ่อน Pets/Eggs/Effects
 -- ======================
 local function HideAllClient()
     for _, obj in ipairs(Workspace:GetChildren()) do
 
-        -- Pets
-        if obj:IsA("Folder") and obj.Name == "Pets" then
+        -- ซ่อน Pets
+        if obj.Name == "Pets" and obj:IsA("Folder") then
             for _, pet in ipairs(obj:GetChildren()) do
                 for _, part in ipairs(pet:GetDescendants()) do
                     if part:IsA("BasePart") then
@@ -61,8 +62,8 @@ local function HideAllClient()
             end
         end
 
-        -- Eggs
-        if obj:IsA("Folder") and obj.Name == "Eggs" then
+        -- ซ่อน Eggs
+        if obj.Name == "Eggs" and obj:IsA("Folder") then
             for _, egg in ipairs(obj:GetChildren()) do
                 for _, part in ipairs(egg:GetDescendants()) do
                     if part:IsA("BasePart") then
@@ -75,7 +76,7 @@ local function HideAllClient()
             end
         end
 
-        -- Effects อื่น
+        -- ปิด Effects ที่อยู่ใน Workspace โดยตรง
         for _, v in ipairs(obj:GetDescendants()) do
             if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") then
                 v.Enabled = false
@@ -85,24 +86,42 @@ local function HideAllClient()
 end
 
 -- ======================
--- AFK Mode อัตโนมัติ
+-- ฟังก์ชันจัดการ 3D Rendering + Overlay
+-- ======================
+local function Perf_Set3DEnabled(enable3D)
+    local ok = pcall(function()
+        RunService:Set3dRenderingEnabled(enable3D)
+    end)
+    _toggleBlackOverlay(not enable3D) -- ถ้า disable 3D -> จอดำ
+end
+
+-- ======================
+-- รัน AFK Mode อัตโนมัติ
 -- ======================
 task.defer(function()
-    -- เปิด Overlay ทันที
-    _toggleBlackOverlay(true)
+    -- ปิด 3D + Overlay ดำ
+    Perf_Set3DEnabled(false)
 
-    -- ซ่อนทุกอย่าง
+    -- ซ่อน Pets/Eggs/Effects
     HideAllClient()
+
+    -- ล็อก FPS
+    if setfpscap then
+        setfpscap(5)
+    elseif _setFPSCap then
+        _setFPSCap(5)
+    end
 end)
 
 -- ======================
--- กันของ Spawn ใหม่
+-- เรียกซ้ำทุก Frame เผื่อ spawn ใหม่
 -- ======================
 RunService.RenderStepped:Connect(function()
     HideAllClient()
 end)
 
-print("[AFK MODE] TP + Hide Pets/Eggs/Effects + FPS lock + Overlay (3D ON)")
+print("[AFK MODE] TP + Hide Pets/Eggs/Effects + FPS lock + Black Screen applied")
+
 
 -- main
 task.wait(20)
