@@ -108,10 +108,10 @@ task.defer(function()
 -- ======================
 -- เรียกซ้ำทุก Frame เผื่อ spawn ใหม่
 -- ======================
-RunService.RenderStepped:Connect(function()
-    HideAllClient()
+    RunService.RenderStepped:Connect(function()
+        HideAllClient()
+    end)
 end)
-
 print("[AFK MODE] TP + Hide Pets/Eggs/Effects + FPS lock + Black Screen applied")
 
 -- main
