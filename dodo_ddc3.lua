@@ -105,14 +105,6 @@ task.defer(function()
     -- ซ่อน Pets/Eggs/Effects
     HideAllClient()
 
-    -- ล็อก FPS
-    if setfpscap then
-        setfpscap(5)
-    elseif _setFPSCap then
-        _setFPSCap(5)
-    end
-end)
-
 -- ======================
 -- เรียกซ้ำทุก Frame เผื่อ spawn ใหม่
 -- ======================
